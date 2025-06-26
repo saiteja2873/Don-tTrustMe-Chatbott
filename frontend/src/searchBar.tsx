@@ -19,7 +19,6 @@ function SearchBar() {
     }
 
     try {
-      setIsTyping(true); // show typing
 
       const res = await axios.post("http://localhost:3000/userinput", {
         search: inputText,
@@ -31,7 +30,6 @@ function SearchBar() {
       setSearches((prev) => [...prev, inputText]);
       setResponses((prev) => [...prev, reply]);
       setInputText("");
-      setIsTyping(false); // hide typing after response
 
       if (textAreaRef.current) {
         textAreaRef.current.style.height = "80px";
@@ -45,7 +43,6 @@ function SearchBar() {
     } catch (error) {
       console.error("Error sending search:", error);
       toast.error("Failed to send search");
-      setIsTyping(false); // hide typing on failure
     }
   };
 
