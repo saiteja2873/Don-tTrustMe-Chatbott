@@ -9,8 +9,7 @@ function SearchBar() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [responses, setResponses] = useState<string[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [isTyping, setIsTyping] = useState(false);
-
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
