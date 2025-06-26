@@ -22,9 +22,12 @@ function SearchBar() {
     try {
       setIsTyping(true); // show typing
 
-      const res = await axios.post("http://localhost:3000/userinput", {
-        search: inputText,
-      });
+      const res = await axios.post(
+        "https://don-ttrustme-chatbott.onrender.com/userinput",
+        {
+          search: inputText,
+        }
+      );
 
       const reply = res.data.reply || "No response received";
 
