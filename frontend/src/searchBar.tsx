@@ -9,8 +9,7 @@ function SearchBar() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [responses, setResponses] = useState<string[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [isTyping, setIsTyping] = useState(false);
-
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -20,7 +19,6 @@ function SearchBar() {
     }
 
     try {
-      setIsTyping(true); // show typing
 
       const res = await axios.post(
         "https://don-ttrustme-chatbott.onrender.com/userinput",
@@ -35,7 +33,6 @@ function SearchBar() {
       setSearches((prev) => [...prev, inputText]);
       setResponses((prev) => [...prev, reply]);
       setInputText("");
-      setIsTyping(false); // hide typing after response
 
       if (textAreaRef.current) {
         textAreaRef.current.style.height = "80px";
@@ -49,7 +46,6 @@ function SearchBar() {
     } catch (error) {
       console.error("Error sending search:", error);
       toast.error("Failed to send search");
-      setIsTyping(false); // hide typing on failure
     }
   };
 
