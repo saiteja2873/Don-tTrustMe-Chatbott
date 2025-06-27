@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { toast } from "sonner";
 import axios from "axios";
+import MessageListWithRegenerate from "./messageList";
 
 function SearchBar() {
   const [inputText, setInputText] = useState<string>("");
@@ -8,7 +9,9 @@ function SearchBar() {
   const [searches, setSearches] = useState<string[]>([]); // Stores previous entries
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [responses, setResponses] = useState<string[]>([]);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null); // ✅ correct  
+
+
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,29 +55,12 @@ function SearchBar() {
   return (
     <div className="relative min-h-screen text-white p-4 pt-20 flex flex-col items-center bg-black">
       {/* ✅ Display past submitted searches (with scroll) */}
-      <div className="absolute top-20 left-0 right-0 px-6 py-2 overflow-y-auto max-h-[calc(100vh-250px)] space-y-4">
-        {searches.map((text, index) => (
-          <div key={index} className="flex flex-col space-y-6">
-            {/* User message (right) */}
-            <div
-              className={`ml-auto bg-blue-600 px-4 py-2 rounded-lg max-w-[70%] break-words text-right shadow
-          ${text.length > 400 ? "text-base" : "text-xl"}`}
-            >
-              {text}
-            </div>
-
-            {/* Gemini response (left) */}
-            <div
-              className={`mr-auto bg-gray-800 px-4 py-2 rounded-lg max-w-[70%] break-words text-left shadow
-          ${responses[index]?.length > 400 ? "text-base" : "text-xl"}`}
-            >
-              {responses[index]}
-            </div>
-          </div>
-        ))}
-        {/* 👇 Scroll-to-bottom anchor */}
-        <div ref={bottomRef} />
-      </div>
+      <MessageListWithRegenerate
+      searches={searches}
+      responses={responses}
+      setResponses={setResponses}
+      bottomRef={bottomRef}
+    />
 
       {/* ✅ Input form */}
       <form onSubmit={handleSubmit} className="w-full flex justify-center">
