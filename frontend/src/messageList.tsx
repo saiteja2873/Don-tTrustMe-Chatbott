@@ -21,7 +21,9 @@ const MessageListWithRegenerate: React.FC<Props> = ({
   setResponses,
   bottomRef,
 }) => {
-  const [isRegeneratingIndex, setIsRegeneratingIndex] = useState<number | null>(null);
+  const [isRegeneratingIndex, setIsRegeneratingIndex] = useState<number | null>(
+    null
+  );
 
   const handleRegenerate = async (index: number) => {
     const originalQuery = searches[index];
@@ -42,7 +44,10 @@ const MessageListWithRegenerate: React.FC<Props> = ({
       updated[index] = {
         ...updated[index],
         regenerated: newReply,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       setResponses(updated);
 
@@ -63,45 +68,47 @@ const MessageListWithRegenerate: React.FC<Props> = ({
 
         return (
           <div key={index} className="flex flex-col space-y-6">
-            {/* User message */}
             <div
               className={`ml-auto bg-blue-600 px-4 py-2 rounded-lg max-w-[70%] break-words text-right shadow 
-                ${text.length > 400 ? "text-base" : "text-xl"} cursor-default no-underline`}
+                ${
+                  text.length > 400 ? "text-base" : "text-xl"
+                } cursor-default no-underline`}
             >
               {text}
             </div>
 
-            {/* AI response */}
             <div
               className={`mr-auto bg-gray-800 px-4 py-2 rounded-lg max-w-[70%] break-words text-left shadow
-                ${responseText?.length > 400 ? "text-base" : "text-xl"} cursor-default no-underline`}
+    ${
+      responseText?.length > 400 ? "text-base" : "text-xl"
+    } cursor-default no-underline relative`}
             >
               {responseText}
 
-              {/* Timestamp */}
-              {res?.timestamp && (
-                <p className="mt-1 text-xs text-gray-400">
-                  {res.timestamp}
-                </p>
-              )}
+              <div className="mt-2 flex justify-between items-center text-xs text-blue-400">
+                {responseText?.split(" ").length > 100 ? (
+                  <button
+                    onClick={() => handleRegenerate(index)}
+                    disabled={isRegeneratingIndex === index}
+                    className="hover:text-blue-300 transition flex items-center space-x-1 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {isRegeneratingIndex === index ? (
+                      <>
+                        <span className="animate-spin h-4 w-4 inline-block border-t-2 border-blue-400 rounded-full"></span>
+                        <span>Regenerating...</span>
+                      </>
+                    ) : (
+                      <>🔁 Regenerate</>
+                    )}
+                  </button>
+                ) : (
+                  <div /> 
+                )}
 
-              {/* Regenerate Button */}
-              {responseText?.split(" ").length > 100 && (
-                <button
-                  onClick={() => handleRegenerate(index)}
-                  disabled={isRegeneratingIndex === index}
-                  className="mt-2 text-xs text-blue-400 no-underline cursor-pointer hover:text-blue-300 transition flex items-center space-x-1"
-                >
-                  {isRegeneratingIndex === index ? (
-                    <>
-                      <span className="animate-spin h-4 w-4 inline-block border-t-2 border-blue-400 rounded-full"></span>
-                      <span>Regenerating...</span>
-                    </>
-                  ) : (
-                    <>🔁 Regenerate</>
-                  )}
-                </button>
-              )}
+                {res?.timestamp && (
+                  <span className="text-gray-400">{res.timestamp}</span>
+                )}
+              </div>
             </div>
           </div>
         );
