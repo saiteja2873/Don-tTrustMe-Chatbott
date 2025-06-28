@@ -26,8 +26,26 @@
 
 ## 📁 Project Structure
 
-<pre><code>``` Don-tTrustMe-Chatbott/ ├── backend/ │ └── backend/ │ ├── src/ │ │ ├── index.ts # Entry point │ │ ├── routes/ │ │ │ └── search.ts # API route │ │ └── utils/ # Gemini handling logic │ ├── key.json # API key │ ├── package.json │ └── tsconfig.json ├── frontend/ │ ├── src/ │ │ ├── App.tsx # Main app │ │ ├── navBar.tsx # Navbar component │ │ └── searchBar.tsx # Chat interface │ ├── vite.config.ts │ └── index.html ``` </code></pre>
-
+<pre><code>
+Don-tTrustMe-Chatbott/
+├── backend/
+│   └── backend/
+│       ├── src/
+│       │   ├── index.ts              # Entry point
+│       │   ├── routes/
+│       │   │   └── search.ts         # API route
+│       │   └── utils/                # Gemini handling logic
+│       ├── key.json                  # API key
+│       ├── package.json
+│       └── tsconfig.json
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx                   # Main app
+│   │   ├── navBar.tsx                # Navbar component
+│   │   └── searchBar.tsx             # Chat interface
+│   ├── vite.config.ts
+│   └── index.html
+</code></pre>
 
 ---
 
