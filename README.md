@@ -1,6 +1,6 @@
 # 🧠 Don'tTrustMe Chatbot
 
-> A full-stack AI chatbot powered by Google's Gemini API — built with React + Vite on the frontend and Bun + TypeScript on the backend.
+> A full-stack AI Chatbot — built with React + Vite on the frontend and Bun + TypeScript on the backend.
 
 ---
 
